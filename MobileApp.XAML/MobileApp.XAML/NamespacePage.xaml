@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage Title="Chapter 2" 
+<ContentPage Title="New Apps Testers" 
              xmlns:sys="clr-namespace:System;assembly=mscorlib" 
              xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
@@ -7,7 +7,7 @@
     <ContentPage.Content>
         <StackLayout Padding="30,30">
             <Label>
-                <sys:String>Hello System.String</sys:String>
+                <sys:String>Hello User </sys:String>
             </Label>
         </StackLayout>
     </ContentPage.Content>

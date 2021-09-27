@@ -1,12 +1,186 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MobileApp.XAML.TestPage">
-    <ContentPage.Content>
+             x:Class="MobileApp.XAML.TestPage"
+             xmlns:model="clr-namespace:MobileApp.XAML.Models"
+              xmlns:mvvm="clr-namespace:MvvmHelpers;assembly=MvvmHelpers"
+             xmlns:viewmodels="clr-namespace:MobileApp.XAML.ViewModels"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Name="TestCMPage"
+             x:DataType="viewmodels:CoffeeEquipmentViewModel"
+             BackgroundColor="AliceBlue"
+             >
+    <ContentPage.BindingContext>
+        <viewmodels:CoffeeEquipmentViewModel/>
+    </ContentPage.BindingContext>
+    <!--<ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+            <Label Text="Welcome to MusicLEJ App test page!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+            <Label Text="{Binding Coff}"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <Label Text="tuff lov"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+        </StackLayout>           
+    </ContentPage.Content>-->
+
+    <ListView ItemSelected="ListView_ItemSelected"
+              ItemTapped="ListView_ItemTapped"
+              CachingStrategy="RecycleElement"
+              BackgroundColor="Yellow" 
+              ItemsSource="{Binding CoffeeGroups}"
+               IsGroupingEnabled="True"
+              GroupDisplayBinding="{Binding Key}"                           
+              HasUnevenRows="True"
+              SeparatorColor="black"
+              SeparatorVisibility="Default"
+              IsPullToRefreshEnabled="True"
+              IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+              RefreshCommand="{Binding RefreshCommand}"
+              RefreshControlColor="Red"
+             >
+        <!--Remove ItermSorce and use source below-->
+        <!--<ListView.ItemsSource>
+            <x:Array Type="{x:Type x:String}">
+                <x:String>ITem 1</x:String>
+                <x:String>ITem 2</x:String>
+                <x:String>ITem 3</x:String>
+                <x:String>ITem 4</x:String>
+            </x:Array>
+        </ListView.ItemsSource>-->
+        
+        <ListView.ItemTemplate  >
+            <DataTemplate x:DataType="model:Coffee" >
+                <!--<TextCell Text="{Binding Name}" />-->
+                <!--<ImageCell  TextColor="Black" Text="{Binding Name}"
+                           Detail="{Binding Roaster }"
+                           ImageSource="{Binding Image}"
+                           />-->
+                <ViewCell >
+                    <ViewCell.ContextActions>
+                        <MenuItem Text="Favourites" Clicked="MenuItem_Clicked"/>
+                        <MenuItem Text="Delete" IsDestructive="True" />
+                    </ViewCell.ContextActions>
+                    <Grid Padding="10">
+                        <Frame CornerRadius="20"
+                           HasShadow="True">
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="{Binding Image}"
+                                       WidthRequest="120"/>
+                                <StackLayout>
+                                    <Label VerticalOptions="Center" 
+                               
+                               FontSize="Large" 
+                               Text="{Binding Name}"/>
+                                    <Label VerticalOptions="Center" 
+                               
+                               FontSize="Medium" 
+                               Text="{Binding Roaster}"/>
+                                </StackLayout>
+
+                            </StackLayout>
+
+                        </Frame>
+
+                    </Grid>
+                   
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+        <ListView.Header>
+            <StackLayout   >
+                <Label Text="Header" BackgroundColor="DarkRed" TextColor="GreenYellow" />
+            </StackLayout>
+        </ListView.Header>
+        <ListView.Footer>
+            <StackLayout >
+                <Label Text="Footer" BackgroundColor="CadetBlue" TextColor="Black" />
+                <StackLayout  Orientation="Horizontal" HorizontalOptions="Center">
+                    <Button Text="Click Me" HorizontalOptions="Center" Clicked="Button_Clicked"/>
+                </StackLayout>
+            </StackLayout>
+        </ListView.Footer>
+        
+    </ListView>
+
+
+    <!--<ListView
+    
+    Orientation="Horizontal" HorizontalOptions="Center"
+    
+    
+        CachingStrategy="RecycleElement"
+        GroupDisplayBinding="{Binding Key}"
+        IsGroupingEnabled="True"
+        IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+        ItemsSource="{Binding CoffeeGroups}"
+       >
+        --><!--<ListView.Behaviors>
+           
+        </ListView.Behaviors>--><!--
+        <ListView.ItemTemplate>
+            <DataTemplate x:DataType="model:Coffee">
+                <ViewCell>
+                    <ViewCell.ContextActions>
+                        <MenuItem
+                          
+                            Text="Favorite" />
+                        <MenuItem IsDestructive="True" Text="Delete" />
+                    </ViewCell.ContextActions>
+                    <Grid Padding="10">
+                        <Frame>
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="{Binding Image}" WidthRequest="66" />
+                                <StackLayout VerticalOptions="Center">
+                                    <Label
+                                        
+                                        Text="{Binding Name}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                     
+                                        Text="{Binding Roaster}"
+                                        VerticalOptions="Center" />
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+        <ListView.GroupHeaderTemplate>
+            <DataTemplate x:DataType="{x:Null}">
+                <ViewCell>
+                    <StackLayout Padding="20,0">
+                        <Label  Text="{Binding Key}" />
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.GroupHeaderTemplate>
+        <ListView.Header>
+            <StackLayout Orientation="Horizontal">
+                <Label
+                    Margin="20"
+                    FontFamily="AC"
+                    HorizontalOptions="Center"
+                    
+                    Text="Coffees of the World">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+        </ListView.Header>
+        <ListView.Footer>
+            <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+                <Button
+                   
+                    
+                    Text="Load More" />
+            </StackLayout>
+        </ListView.Footer>
+    </ListView>-->
+
 </ContentPage>
