@@ -5,12 +5,13 @@
              x:Class="MobileApp.XAML.StaticPage">
     <ContentPage.Content>
         <StackLayout Padding="30,30">
-            <BoxView Color="{x:Static Color.Maroon}" WidthRequest="150" HeightRequest="150" />
+            <BoxView Color="{x:Static Color.Maroon}" CornerRadius="20"  WidthRequest="150" HeightRequest="150" />
             <BoxView WidthRequest="150" HeightRequest="150">
                 <BoxView.Color>
                     <x:Static>Color.Lime</x:Static>
                 </BoxView.Color>
             </BoxView>
+            <BoxView Color="DarkBlue" CornerRadius="20"  WidthRequest="150" HeightRequest="150" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
