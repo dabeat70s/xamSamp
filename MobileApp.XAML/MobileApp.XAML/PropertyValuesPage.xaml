@@ -10,10 +10,16 @@
             </Label>
             <Label>Content Property</Label>
             <Button FontSize="Medium" Text="Medium Size Button" />
-            <Button FontAttributes="Italic,Bold" Text="Italic Bold Button" />
+            <Button FontAttributes="Italic,Bold" Text="Italic Bold Button" Clicked="Button_Clicked" />
             <Button Text="Make It So" Clicked="ButtonClicked" />
             <Grid>
                 <Label Grid.Row="1" Grid.Column="1" Text="Cell (1,1)" />
+                <Label Grid.Row="2" Grid.Column="4" Text="Cell (2,4)" />
+                <Label Grid.Row="3" Grid.Column="1" Text="Cell (3,1)" />                
+                <Label Grid.Row="4" Grid.Column="0" Text="Cell (1,1)" />
+                <Label Grid.Row="5" Grid.Column="3" Text="Cell (1,1)" />
+                <Label Grid.Row="6" Grid.Column="5" Text="Cell (1,1)" />
+               
             </Grid>
         </StackLayout>
     </ContentPage.Content>

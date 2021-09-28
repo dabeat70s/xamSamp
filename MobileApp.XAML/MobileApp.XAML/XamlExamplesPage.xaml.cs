@@ -17,7 +17,8 @@ namespace MobileApp.XAML
             InitializeComponent();
 
             string[] myPageNames = { "Namespace", "Static", "Array", 
-                "Reference", "Constructors", "Property Values","Test", "Collection" };
+                "Reference", "Constructors", "Property Values",
+                "Test", "Collection", "Controls" };
             examples.ItemsSource = myPageNames;
 
             examples.ItemTapped += (sender, e) =>
@@ -48,6 +49,9 @@ namespace MobileApp.XAML
                         break;
                     case "Collection":
                         gotoPage = new CollectionPage();
+                        break;
+                    case "Controls":
+                        gotoPage = new ControlsPage();
                         break;
                     default:
                         gotoPage = new NamespacePage();

@@ -16,5 +16,11 @@ namespace MobileApp.XAML
         {
             InitializeComponent();
         }
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            await DisplayAlert("Italic Alert", ((Button)sender).Text, "Ok");
+            ((Button)sender).TextColor = Color.Red;
+        }
     }
 }
