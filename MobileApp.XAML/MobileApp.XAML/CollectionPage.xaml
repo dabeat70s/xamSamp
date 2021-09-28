@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileApp.XAML.CollectionPage">-->
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileApp.XAML.CollectionPage"
+             xmlns:model="clr-namespace:MobileApp.XAML.Models"
+              xmlns:mvvm="clr-namespace:MvvmHelpers;assembly=MvvmHelpers"
+             xmlns:viewmodels="clr-namespace:MobileApp.XAML.ViewModels"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Name="CollectionCMPage"
+             x:DataType="viewmodels:CoffeeEquipmentViewModel"
+             BackgroundColor="AliceBlue"
+             >  
+    <ContentPage.BindingContext>
+        <viewmodels:CoffeeEquipmentViewModel/>
+    </ContentPage.BindingContext> 
+
+    <RefreshView IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                 Command="{Binding RefreshCommand}"
+                 RefreshColor="Cyan"
+                 Grid.ColumnSpan="2">
+        <CollectionView BackgroundColor="Yellow" 
+                        ItemsSource="{Binding Coffees}"
+                        SelectionMode="Single"
+                        SelectionChanged="CollectionView_SelectionChanged">
+            <!--<CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
+            </CollectionView.ItemsLayout>-->            
+
+            <CollectionView.ItemTemplate  >
+                <DataTemplate x:DataType="model:Coffee" >
+                    <Grid Padding="10">
+                        <Frame CornerRadius="20"
+                           HasShadow="True">
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="{Binding Image}"
+                                       WidthRequest="120"/>
+                                <StackLayout>
+                                    <Label VerticalOptions="Center"                                
+                               FontSize="Large" 
+                               Text="{Binding Name}"/>
+                                    <Label VerticalOptions="Center"                                
+                               FontSize="Medium" 
+                               Text="{Binding Roaster}"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.Header>
+                <StackLayout   >
+                    <Label Text="Header" BackgroundColor="DarkRed" TextColor="GreenYellow" />
+                </StackLayout>
+            </CollectionView.Header>
+            <CollectionView.Footer>
+                <StackLayout >
+                    <Label Text="Footer" BackgroundColor="CadetBlue" TextColor="Black" />
+                    <StackLayout  Orientation="Horizontal" HorizontalOptions="Center">
+                        <Button Text="Click Me" HorizontalOptions="Center" Clicked="Button_Clicked"/>
+                    </StackLayout>
+                </StackLayout>
+            </CollectionView.Footer>
+
+        </CollectionView>
+    </RefreshView>
+</ContentPage>
